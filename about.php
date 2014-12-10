@@ -4,6 +4,10 @@ require_once('includes/header.php');
 require('includes/db.php');
 
 ?>
+       <?php
+  
+          include('partials/carousel.php');?>
+          </div>
 
 
 
