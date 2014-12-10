@@ -17,6 +17,7 @@ require_once('classes/review.class.php');
 
 		$film = $db->query('SELECT * FROM film WHERE id = '.$db->real_escape_string($_GET['id']))->fetch_object('Film');
 
+		$reviews = $db->query('SELECT * FROM review WHERE film_id= '.$db->real_escape_string($_GET['id']).' ORDER BY id DESC LIMIT 10');
 		?>
 		<div class="col-md-9"> <p>Film - <?=$film->name?> (<?=$film->description?>)</p></div>
 		<div class="col-md-3"><?php echo "<img src='http://comp2203.ecs.soton.ac.uk/coursework/1415/assets/posters/" .$film -> id. "_medium.jpg'>" ?>	
@@ -46,7 +47,55 @@ require_once('classes/review.class.php');
 			</div>
 		</div>
 
+<div>
+				<h3>Current Reviews</h3>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Film Id</th>
+							<th>Reviewer</th>
+							<th>Comment</th>
 
+							
+						</tr>
+					</thead>
+					<body>
+						<?php while($review = $reviews->fetch_object("Review")): ?>
+							<tr>
+								<td><?=$review->id?></td>
+								<td><?=$review->reviewer?></td>
+								<td><?=$review->comment?></td>
+							</tr>
+						<?php endwhile; ?>
+					</tbody>
+				</table>
+			</div>
+			
+			
+			
+		</div>
+		
+	
+		<div class="row">
+			<h3>Add a Review!</h3>
+		
+			<form action="process-review.php" method="post">
+			<input type="hidden" name="film_id" value=<?php echo ($_GET['id']);?>><br>
+			Name:    <input class="form-control"  type="text" name="reviewer"><br>
+			Comment: <input class="form-control"  type="text" name="comment"><br>
+			Liked:   <input class="form-control"  type="Radio" Name="lik" ><br>
+			<input type="submit" class="btn btn-submit"><br>
+			
+
+			
+			</form>
+		
+			
+		</div>
+		
+
+
+	<a title="Scroll to Top" href="#top">Scroll to Top</a>
 
 
 
