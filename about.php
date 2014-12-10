@@ -26,6 +26,16 @@ $films = $db->query("SELECT * FROM `film` ORDER BY RAND() LIMIT 1");
 
 
     </div>
+        <div id="film-list" class="row">
+    <div class="list-group  row text-center col-md-12 random">
+    
+    <?php
+        while($film = $films->fetch_object('Film')): 
+          include('partials/random.php');?>
+          </div>
+
+          <?php endwhile; ?>
+          </div>
 
 
  <?php require_once('includes/footer.php'); ?>
