@@ -46,6 +46,20 @@ require_once('classes/review.class.php');
 
 			</div>
 		</div>
+				<div class= "row rotten">
+			 <div class="col-md-12">
+			 	<?php
+			 	$json = file_get_contents('http://api.rottentomatoes.com/api/public/v1.0/movies/'.$film->rt_id.'.json?apikey=ncb7wm7fjh3vcgc76grb5ej3');
+			 	$films = json_decode($json);
+			 	//echo '<pre>';
+			 	//print_r($films);
+			 	//echo '</pre>';
+				?>
+				<h3>Rotten Tomatoes Reviews</h3>
+				<p> Critics Rating: <?echo $films->ratings->critics_rating;?></p>
+				<p> Critics Score: <?echo $films->ratings->critics_score;?></p>
+				<p> Audience Score: <?echo $films->ratings->audience_score;?></p>
+				<p> Audience Rating: <?echo $films->ratings->audience_rating;?></p>
 
 <div>
 				<h3>Current Reviews</h3>
